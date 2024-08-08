@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import signinbg from "../assets/images/img-signin.jpg";
 // import { AntdFooter } from "components/Layout/Footer";
 // import { AntdHeader } from "components/Layout/Header";
-import { Header, Footer } from "components/Layout";
+import { Header, Footer } from "components";
 
 const { Content } = Layout;
 const { Title } = Typography;

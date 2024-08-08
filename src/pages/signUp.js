@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logo1 from "../assets/images/logos-facebook.svg";
 import logo2 from "../assets/images/logo-apple.svg";
 import logo3 from "../assets/images/Google__G__Logo.svg.png";
-import { Header, Footer } from "components/Layout";
+import { Header, Footer } from "components";
 const { Content } = Layout;
 const { Title } = Typography;
 export default class SignUp extends Component {

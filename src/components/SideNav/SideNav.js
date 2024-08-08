@@ -14,7 +14,9 @@ export default function SideNav({ color }) {
         <img src={logo} alt="" href="#" />
       </div>
       <hr />
+      {/* Menu items in sideNav */}
       <MenuItem pathname={pathname} color={color} />
+          {/* Side Nav button */}
       <div className="aside-footer">
         <div className="footer-box" style={{ backgroundColor: color }}>
           <span className="icon" style={{ color: "red" }}>

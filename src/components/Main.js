@@ -10,9 +10,9 @@ import {
   handleFixedNavbar,
   handleSidebar,
 } from "Redux/features/MainSlice";
-import SideNav from "./SideNav";
-import AntdHeaderRight from "./AntdHeader";
-import AntdFooter from "./AntdFooter";
+import SideNav from "./SideNav/SideNav";
+import AntdHeaderRight from "./Header/AntdHeader";
+import AntdFooter from "./Footer/AntdFooter";
 const { Sider, Header: AntHeader, Content } = Layout;
 export default function Main() {
   let { pathname } = useLocation();
