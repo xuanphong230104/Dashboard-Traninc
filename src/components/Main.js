@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Layout, Drawer, Affix } from "antd";
+import React, { useEffect, useState } from "react";
+import { Layout, Drawer, Affix, theme,Button } from "antd";
 import { Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -9,13 +9,25 @@ import {
   handleSidenavType,
   handleFixedNavbar,
   handleSidebar,
+  
 } from "Redux/features/MainSlice";
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UploadOutlined,
+  UserOutlined,
+  VideoCameraOutlined,
+} from '@ant-design/icons';
 import SideNav from "./SideNav/SideNav";
 import AntdHeaderRight from "./Header/AntdHeader";
 import AntdFooter from "./Footer/AntdFooter";
 const { Sider, Header: AntHeader, Content } = Layout;
 export default function Main() {
   let { pathname } = useLocation();
+  const [collapsed, setCollapsed] = useState(false);
+  // const {
+  //   token: { colorBgContainer, borderRadiusLG },
+  // } = theme.useToken();
   const { navFixed, sideNavType, sideNavColor, placement, openSidebar } =
     useSelector((state) => state.mainSlice);
   const dispatch = useDispatch();
@@ -66,6 +78,8 @@ export default function Main() {
         </Layout>
       </Drawer>
       <Sider
+        collapsible
+        collapsed={collapsed}
         breakpoint="lg"
         collapsedWidth="0"
         onCollapse={(collapsed, type) => {
@@ -84,12 +98,32 @@ export default function Main() {
       <Layout>
         {navFixed ? (
           <Affix>
+            {/* <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            /> */}
             <AntHeader>
               <AntdHeaderRight name={pathname} />
             </AntHeader>
           </Affix>
         ) : (
           <AntHeader>
+             <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
             <AntdHeaderRight name={pathname} />
           </AntHeader>
         )}

@@ -5,7 +5,7 @@ import { dashboard } from "utils/SideNavData";
 import MenuItem from "utils/SideNavData";
 import { Button } from "antd";
 const logo = "https://traninc.vn/wp-content/uploads/2020/02/Logo.svg"
-export default function SideNav({ color }) {
+export default function  SideNav({ color }) {
   let { pathname } = useLocation();
   pathname = pathname.replace("/", "");
   return (
