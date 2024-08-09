@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 // import logo from "../../assets/images/logo.png";
 import { dashboard } from "utils/SideNavData";
 import MenuItem from "utils/SideNavData";
-import { Button } from "antd";
+import { Button,Mn } from "antd";
 const logo = "https://traninc.vn/wp-content/uploads/2020/02/Logo.svg"
 export default function  SideNav({ color }) {
   let { pathname } = useLocation();
@@ -17,6 +17,7 @@ export default function  SideNav({ color }) {
       {/* Menu items in sideNav */}
       <MenuItem pathname={pathname} color={color} />
           {/* Side Nav button */}
+         
       
     </>
   );

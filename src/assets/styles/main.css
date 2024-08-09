@@ -3042,4 +3042,14 @@ body {
     path {
     fill: #8c8c8c;
   }
+  .icon {
+    margin-right: 6px;
+  }
   
+  .label {
+    display: inline;
+  }
+  
+  .ant-menu-inline-collapsed .label {
+    display: none;
+  }

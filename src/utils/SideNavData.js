@@ -9,7 +9,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 export const dashboard = (color) => [
   <svg
     width="20"
@@ -33,7 +33,7 @@ export const dashboard = (color) => [
   </svg>,
 ];
 
-const getItem = (label, path, icon, pathName, color) => {
+const getItem = (label, path, icon, pathName, color, collapsed) => {
   return (
     <NavLink to={path}>
       <span
@@ -44,7 +44,7 @@ const getItem = (label, path, icon, pathName, color) => {
       >
         {icon}
       </span>
-      <span className="label">{label}</span>
+      {!collapsed && <span className="label">{label}</span>}
     </NavLink>
   );
 };
@@ -155,6 +155,6 @@ export const items = (pathname, color) => [
 ];
 
 const MenuItem = ({ pathname, color }) => {
-  return <Menu mode="inline" theme="light" items={items(pathname, color)} />;
+  return <Menu mode="inline" theme="dark" items={items(pathname, color)} />;
 };
 export default MenuItem;

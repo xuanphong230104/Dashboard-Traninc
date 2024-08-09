@@ -43,26 +43,12 @@ export default function Main() {
 
   return (
     <Layout className={`layout-dashboard `}>
-      {/* <Sider
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-        width={250}
-        theme="light"
-        className={`sider-primary ant-layout-sider-primary ${
-          sideNavType === "#fff" ? "active-route" : ""
-        }`}
-        style={{ background: sideNavType }}
-      >
-        <SideNav color={sideNavColor} />
-      </Sider> */}
-
       <Sider
         trigger={null}
         collapsible
         collapsed={collapsed}
         breakpoint="lg"
-        // collapsedWidth="0"
+        // collapsedWidth="120px"
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
         }}
