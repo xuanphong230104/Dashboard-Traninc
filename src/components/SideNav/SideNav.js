@@ -17,7 +17,13 @@ export default function  SideNav({ color }) {
       {/* Menu items in sideNav */}
       <MenuItem pathname={pathname} color={color} />
           {/* Side Nav button */}
-      <div className="aside-footer">
+      
+    </>
+  );
+}
+
+
+{/* <div className="aside-footer">
         <div className="footer-box" style={{ backgroundColor: color }}>
           <span className="icon" style={{ color: "red" }}>
             {dashboard(color)}
@@ -28,7 +34,4 @@ export default function  SideNav({ color }) {
             DOCUMENTATION
           </Button>
         </div>
-      </div>
-    </>
-  );
-}
+      </div> */}
