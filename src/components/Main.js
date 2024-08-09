@@ -1,37 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Drawer, Affix, theme, Button } from "antd";
+import { Layout, Drawer, Button } from "antd";
 import { Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  openDrawer,
-  handleSideNavColor,
-  setPlaceMent,
-  handleSidenavType,
-  handleFixedNavbar,
-  handleSidebar,
-} from "Redux/features/MainSlice";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { setPlaceMent, handleSidebar } from "Redux/features/MainSlice";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import SideNav from "./SideNav/SideNav";
 import AntdHeaderRight from "./Header/AntdHeader";
 import AntdFooter from "./Footer/AntdFooter";
+
 const { Sider, Header: AntHeader, Content } = Layout;
 
 export default function Main() {
   let { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
-  // const {
-  //   token: { colorBgContainer, borderRadiusLG },
-  // } = theme.useToken();
-  const { navFixed, sideNavType, sideNavColor, placement, openSidebar } =
-    useSelector((state) => state.mainSlice);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const isSmallScreen = windowWidth < 992;
+  const { sideNavType, sideNavColor, placement, openSidebar } = useSelector((state) => state.mainSlice);
   const dispatch = useDispatch();
   pathname = pathname.replace("/", "");
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (pathname === "rtl") {
@@ -42,37 +37,62 @@ export default function Main() {
   }, [pathname]);
 
   return (
-    <Layout className={`layout-dashboard `}>
+    <Layout
+      className={`layout-dashboard ${pathname === "profile" ? "layout-profile" : ""} ${pathname === "rtl" ? "layout-dashboard-rtl" : ""}`}
+    >
+      <Drawer
+        title={false}
+        placement={placement === "right" ? "left" : "right"}
+        closable={false}
+        onClose={() => dispatch(handleSidebar(false))}
+        visible={openSidebar}
+        key={placement === "right" ? "left" : "right"}
+        width={250}
+        className={`drawer-sidebar ${pathname === "rtl" ? "drawer-sidebar-rtl" : ""}`}
+      >
+        <Layout
+          className={`layout-dashboard ${pathname === "rtl" ? "layout-dashboard-rtl" : ""}`}
+        >
+          <Sider
+            trigger={null}
+            width={250}
+            theme="light"
+            className={`sider-primary ant-layout-sider-primary ${sideNavType === "#fff" ? "active-route" : ""}`}
+            style={{ background: sideNavType }}
+          >
+            <SideNav color={sideNavColor} />
+          </Sider>
+        </Layout>
+      </Drawer>
       <Sider
-        trigger={null}
         collapsible
         collapsed={collapsed}
-        breakpoint="lg"
-        // collapsedWidth="120px"
+        collapsedWidth={isSmallScreen ? "0" : "80"}
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
         }}
+        trigger={null}
         width={250}
-        theme="dark"
-        className={`sider-primary ant-layout-sider-primary ${
-          sideNavType === "#fff" ? "active-route" : ""
-        }`}
+        theme="light"
+        className={`sider-primary ant-layout-sider-primary ${sideNavType === "#fff" ? "active-route" : ""}`}
         style={{ background: sideNavType }}
       >
         <SideNav color={sideNavColor} />
       </Sider>
       <Layout>
         <AntHeader>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
+          {!isSmallScreen && (
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+          )}
           <AntdHeaderRight name={pathname} />
         </AntHeader>
         <Content className="content-ant">
